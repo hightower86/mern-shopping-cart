@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 
 const app = express();
 
+app.use('/api', require('./routes/cart.routes'));
+
 const PORT = config.get('port') || 5001;
 
 async function start() {
