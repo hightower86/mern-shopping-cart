@@ -4,6 +4,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const db = [
+  { id: 1, title: 'Table', price: 500 },
+  { id: 2, title: 'TV', price: 2300 },
+  { id: 3, title: 'Laptop', price: 500 },
+  { id: 4, title: 'Iron', price: 500 },
+  { id: 5, title: 'Boiler', price: 500 }
+];
+
 const app = express();
 
 app.use(cors());
@@ -29,6 +37,14 @@ app.get('/api/cart', (req, res) => {
   } catch (e) {
     res.status(500).json({ message: 'Something goes wrong' });
     //console.log('error');
+  }
+});
+
+app.get('/api/goods', (req, res) => {
+  try {
+    res.status(200).json(db);
+  } catch (e) {
+    res.status(500).json({ message: 'problem with connect to goods' });
   }
 });
 
