@@ -5,11 +5,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const db = [
-  { id: 1, title: 'Table', price: 500 },
-  { id: 2, title: 'TV', price: 2300 },
-  { id: 3, title: 'Laptop', price: 500 },
-  { id: 4, title: 'Iron', price: 500 },
-  { id: 5, title: 'Boiler', price: 500 }
+  { id: 1, title: 'Table', price: 850 },
+  { id: 2, title: 'TV', price: 900 },
+  { id: 3, title: 'Laptop', price: 1500 },
+  { id: 4, title: 'Iron', price: 80 },
+  { id: 5, title: 'Boiler', price: 60 }
 ];
 
 const app = express();
