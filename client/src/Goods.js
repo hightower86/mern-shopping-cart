@@ -4,11 +4,13 @@ const Goods = ({ goods }) => {
   console.log(goods);
   return (
     <div>
-      {/* <ul>
-        {goods.map(good => (
-          <li key={good.id}>{good}</li>
+      <ul>
+        {goods.map(({ id, title, price }) => (
+          <li key={id}>
+            {title},{price},
+          </li>
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 };

@@ -10,14 +10,18 @@ import Goods from './Goods';
 const App = () => {
   const [goods, setGoods] = useState([]);
 
-  useEffect(() => getDb(), []);
-
-  const getDb = () => {
-    fetch('http://localhost:5002/api/goods')
-      .then(res => res.json())
-      .then(data => setGoods(data))
-      .catch(error => console.error(error));
-  };
+  useEffect(() => {
+    const getDb = async () => {
+      try {
+        const response = await fetch('http://localhost:5002/api/goods');
+        const db = await response.json();
+        setGoods(db);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    getDb();
+  }, []);
 
   return (
     <div>
