@@ -1,0 +1,9 @@
+.goods {
+  width: 400px;
+  min-height: 200px;
+  background-color: rgb(220, 220, 220);
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
