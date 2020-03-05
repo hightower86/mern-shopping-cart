@@ -4,7 +4,16 @@ import './Calc.css';
 const Calc = () => {
   const onSubmit = e => {
     e.preventDefault();
-    console.log(formData);
+    const formData = new FormData(e.target);
+    const currency = formData.get('currency');
+    //console.log(formData.get('currency'));
+    fetch(`http://localhost:5002/api/cart?currency=${currency}&`)
+      .then(res => res.json())
+      .then(data => console.table(data))
+      .catch(error => {
+        console.log(error);
+        return error;
+      });
   };
   return (
     <div>
@@ -12,7 +21,7 @@ const Calc = () => {
       <form onSubmit={e => onSubmit(e)}>
         <div className='form-group'>
           <label htmlFor='i-currency'>Select currency</label>
-          <select name='' id=''>
+          <select name='currency' id=''>
             <option value='usd'>USD</option>
             <option value='eur'>EUR</option>
             <option value='rub'>RUB</option>

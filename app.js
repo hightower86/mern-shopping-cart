@@ -2,8 +2,11 @@ const express = require('express');
 const config = require('config');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors());
 
 // create application/json parser
 const jsonParser = bodyParser.json();
@@ -12,18 +15,20 @@ const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 //app.use('/api/cart', require('./routes/cart.routes'));
 
-app.post('/api/cart', jsonParser, (req, res) => {
-  try {
-    res.send(req.body);
-  } catch (e) {
-    res.status(500).json({ message: 'Something goes wrong' });
-  }
-});
+// app.post('/api/cart', jsonParser, (req, res) => {
+//   try {
+//     res.send(req.body);
+//   } catch (e) {
+//     res.status(500).json({ message: 'Something goes wrong' });
+//   }
+// });
 app.get('/api/cart', (req, res) => {
   try {
     res.json(req.query);
+    console.log('api/cart', req.query);
   } catch (e) {
     res.status(500).json({ message: 'Something goes wrong' });
+    //console.log('error');
   }
 });
 
