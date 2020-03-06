@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Cart.css';
 
 const Cart = () => {
+  const [items, setItems] = useState([]);
+
   const onSubmit = e => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -18,11 +20,34 @@ const Cart = () => {
   return (
     <div>
       <h2>Cart</h2>
+      <div className='result'>
+        <table>
+          <thead>
+            <tr>
+              <td>#</td>
+              <td>name</td>
+              <td>quantity</td>
+              <td>currency</td>
+              <td>price</td>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map(({ id, name, quantity, price, currency }) => (
+              <tr>
+                <td>1</td>
+                <td>{name}</td>
+                <td>{quantity}</td>
+                <td>{currency}</td>
+                <td>{price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <form onSubmit={e => onSubmit(e)}>
         <div className='form-group'></div>
-        <button>Count!</button>
+        <button>Calculate !</button>
       </form>
-      <div className='result'>result</div>
     </div>
   );
 };

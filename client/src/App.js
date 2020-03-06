@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Calc from './Cart';
+import Cart from './Cart';
 import Goods from './Goods';
 import './App.css';
 
@@ -21,9 +21,9 @@ const App = () => {
 
   return (
     <div>
-      <h1>App </h1>
+      <h1>Shopping cart currency calculator </h1>
       <Goods goods={goods} />
-      <Calc />
+      <Cart />
     </div>
   );
 };

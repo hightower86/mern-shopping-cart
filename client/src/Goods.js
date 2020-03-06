@@ -5,11 +5,19 @@ import Good from './Good';
 import './Goods.css';
 
 const Goods = ({ goods }) => {
-  console.log(goods);
+  const addToCartHandle = e => {
+    console.dir(e.target.name);
+  };
+
   return (
     <div className='goods'>
-      {goods.map(({ id, title, price }) => (
-        <Good key={id} title={title} price={price} />
+      {goods.map(({ id, name, price }) => (
+        <Good
+          key={id}
+          name={name}
+          price={price}
+          addToCartHandle={addToCartHandle}
+        />
       ))}
     </div>
   );
