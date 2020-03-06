@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Calc from './Calc';
+import Calc from './Cart';
 import Goods from './Goods';
+import './App.css';
 
 const App = () => {
   const [goods, setGoods] = useState([]);

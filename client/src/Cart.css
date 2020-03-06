@@ -1,7 +1,7 @@
 .result {
   height: 100px;
-  width: 200px;
-  background-color: rgb(204, 204, 204);
+  width: 400px;
+  background-color: rgb(210, 210, 244);
   margin-top: 10px;
   padding: 10px;
   border-radius: 10px;
@@ -23,7 +23,4 @@ button:hover {
 }
 button:focus {
   outline: none;
-}
-select {
-  font-size: 20px;
 }

@@ -1,5 +1,6 @@
 .goods {
-  width: 400px;
+  margin: 0 auto;
+  min-width: 200px;
   min-height: 200px;
   background-color: rgb(220, 220, 220);
   padding: 10px;
