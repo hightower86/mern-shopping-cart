@@ -12,7 +12,7 @@ const Good = ({ id, name, price, addToCartHandle }) => {
         <option value='eur'>EUR</option>
         <option value='rub'>RUB</option>
       </select>
-      <button name={name} onClick={addToCartHandle}>
+      <button id={id} name={name} onClick={addToCartHandle}>
         add to cart
       </button>
     </div>

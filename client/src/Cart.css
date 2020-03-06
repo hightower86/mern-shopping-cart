@@ -1,5 +1,5 @@
 .result {
-  height: 100px;
+  min-height: 100px;
   width: 400px;
   background-color: rgb(210, 210, 244);
   margin-top: 10px;
@@ -33,6 +33,7 @@ tr {
   display: flex;
   justify-content: space-between;
   border: 1px solid rgb(143, 142, 142);
+  border-top: none;
   padding: 5px 15px;
 }
 td {

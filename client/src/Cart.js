@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Cart.css';
 
-const Cart = () => {
-  const [items, setItems] = useState([]);
+const Cart = ({ cartItems }) => {
+  //const [items, setItems] = useState([]);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -32,9 +32,9 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {items.map(({ id, name, quantity, price, currency }) => (
-              <tr>
-                <td>1</td>
+            {cartItems.map(({ id, name, price, quantity, currency }) => (
+              <tr key={id}>
+                <td>{id}</td>
                 <td>{name}</td>
                 <td>{quantity}</td>
                 <td>{currency}</td>
