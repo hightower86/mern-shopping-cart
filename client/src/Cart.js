@@ -1,8 +1,10 @@
 import React from 'react';
+import CartItem from './CartItem';
 import './Cart.css';
 
-const Cart = ({ cartItems }) => {
+const Cart = ({ cartItems, onCurrencyChange }) => {
   //const [items, setItems] = useState([]);
+  //useEffect(() => console.table(cartItems), [cartItems]);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -32,14 +34,12 @@ const Cart = ({ cartItems }) => {
             </tr>
           </thead>
           <tbody>
-            {cartItems.map(({ id, name, price, quantity, currency }) => (
-              <tr key={id}>
-                <td>{id}</td>
-                <td>{name}</td>
-                <td>{quantity}</td>
-                <td>{currency}</td>
-                <td>{price}</td>
-              </tr>
+            {cartItems.map(item => (
+              <CartItem
+                item={item}
+                key={item.id}
+                onCurrencyChange={onCurrencyChange}
+              />
             ))}
           </tbody>
         </table>

@@ -9,19 +9,15 @@ const Good = ({ id, name, price, addToCartHandle }) => {
 
   //useEffect(() => (inpCurrency.current.value = currency), []);
 
-  const onCurrencyChange = e => {
-    setCurrency(e.target.value);
-    console.log(currency);
-  };
   return (
     <div className='good' key={id}>
       <h3>{name}</h3>
       <p>price: {price}</p>
-      <select name='currency' onChange={onCurrencyChange}>
+      {/* <select name='currency' id={id} onChange={onCurrencyChange}>
         <option value='usd'>USD</option>
         <option value='eur'>EUR</option>
         <option value='rub'>RUB</option>
-      </select>
+      </select> */}
       <button id={id} name={currency} onClick={addToCartHandle}>
         add to cart
       </button>

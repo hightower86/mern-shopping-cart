@@ -4,7 +4,7 @@ import Good from './Good';
 
 import './Goods.css';
 
-const Goods = ({ goods, addToCartHandle }) => {
+const Goods = ({ goods, addToCartHandle, onCurrencyChange }) => {
   return (
     <div className='goods'>
       {goods.map(({ id, name, price }) => (
@@ -13,7 +13,9 @@ const Goods = ({ goods, addToCartHandle }) => {
           id={id}
           name={name}
           price={price}
+          currency='usd'
           addToCartHandle={addToCartHandle}
+          //onCurrencyChange={onCurrencyChange}
         />
       ))}
     </div>
