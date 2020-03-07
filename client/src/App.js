@@ -13,7 +13,7 @@ const App = () => {
         const response = await fetch('http://localhost:5002/api/goods');
         const data = await response.json();
         setGoods(data);
-        console.table('in useEffect', data);
+        // console.table('in useEffect', data);
       } catch (e) {
         console.error(e);
       }
@@ -22,14 +22,29 @@ const App = () => {
   }, []);
 
   const addToCartHandle = e => {
-    console.log(e.target.id);
-    const { id, name, quantity, currency, price } = e.target;
-    //console.log(goods.find(g => String(g.id) == String(e.target.id)));
-    setCartItems([
-      ...cartItems,
-      goods.find(g => String(g.id) === String(e.target.id))
-    ]);
-    console.table(cartItems);
+    console.log(e.target.name);
+    const itemToCart = goods.find(g => String(g.id) === String(e.target.id));
+    const itemIndex = cartItems.findIndex(
+      i => String(i.id) === String(e.target.id)
+    );
+    let item = cartItems[itemIndex];
+    if (item) {
+      const newItem = {
+        ...item,
+        quantity: item.quantity + 1,
+        price: item.price + itemToCart.price
+      };
+      //console.log(newItem);
+      setCartItems([
+        ...cartItems.slice(0, itemIndex),
+        newItem,
+        ...cartItems.slice(itemIndex + 1)
+      ]);
+    } else {
+      setCartItems([...cartItems, { ...itemToCart, quantity: 1 }]);
+    }
+
+    //console.table(cartItems);
   };
 
   return (

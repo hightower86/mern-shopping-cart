@@ -9,6 +9,7 @@ const Goods = ({ goods, addToCartHandle }) => {
     <div className='goods'>
       {goods.map(({ id, name, price }) => (
         <Good
+          key={id}
           id={id}
           name={name}
           price={price}
