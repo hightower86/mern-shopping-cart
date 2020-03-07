@@ -23,26 +23,26 @@ const App = () => {
 
   const onCurrencyChange = e => {
     //setCurrency(e.target.value);
-    const goodIndex = goods.findIndex(g => {
+    const cartIndex = cartItems.findIndex(i => {
       //console.log(g, g.id);
-      return String(g.id) === String(e.target.id);
+      return String(i.id) === String(e.target.id);
     });
-    const good = goods[goodIndex];
-    if (good) {
-      setGoods([
-        ...goods.slice(0, goodIndex),
-        { ...good, currency: e.target.value },
-        ...goods.slice(goodIndex + 1)
+    const cartItem = cartItems[cartIndex];
+    if (cartItem) {
+      setCartItems([
+        ...cartItems.slice(0, cartIndex),
+        { ...cartItem, currency: e.target.value },
+        ...cartItems.slice(cartIndex + 1)
       ]);
     }
+    console.table(cartItems);
     //console.log('onCurrencyChange', e.target.value);
-    //console.log(item);
   };
 
   const addToCartHandle = e => {
-    console.log(e.target.name);
+    //console.log(e.target.name);
     const itemToCart = goods.find(g => String(g.id) === String(e.target.id));
-    console.log('itemToCart currency', itemToCart.currency);
+    //console.log('itemToCart currency', itemToCart.currency);
     const itemIndex = cartItems.findIndex(
       i => String(i.id) === String(e.target.id)
     );
@@ -51,8 +51,8 @@ const App = () => {
       const newItem = {
         ...item,
         quantity: item.quantity + 1,
-        price: item.price + itemToCart.price,
-        currency: itemToCart.currency
+        price: item.price + itemToCart.price
+        //currency: itemToCart.currency
       };
       //console.log(newItem);
       setCartItems([
@@ -63,11 +63,11 @@ const App = () => {
     } else {
       setCartItems([
         ...cartItems,
-        { ...itemToCart, quantity: 1, currency: itemToCart.currency }
+        { ...itemToCart, quantity: 1, currency: 'usd' }
       ]);
     }
 
-    console.table(cartItems);
+    // console.table(cartItems);
   };
 
   return (
@@ -79,6 +79,7 @@ const App = () => {
         onCurrencyChange={onCurrencyChange}
       />
       <Cart cartItems={cartItems} onCurrencyChange={onCurrencyChange} />
+      <button>Calculate !</button>
     </div>
   );
 };

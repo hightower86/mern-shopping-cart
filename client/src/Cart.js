@@ -44,10 +44,10 @@ const Cart = ({ cartItems, onCurrencyChange }) => {
           </tbody>
         </table>
       </div>
-      <form onSubmit={e => onSubmit(e)}>
+      {/* <form onSubmit={e => onSubmit(e)}>
         <div className='form-group'></div>
-        <button>Calculate !</button>
-      </form>
+        
+      </form> */}
     </div>
   );
 };
