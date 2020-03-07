@@ -2,13 +2,8 @@ select {
   font-size: 14px;
 }
 
-.t-row {
-}
-
 .td-name {
   width: 80px;
-  display: flex;
-  justify-content: start;
 }
 .td-id {
   width: 10px;

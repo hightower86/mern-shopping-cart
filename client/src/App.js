@@ -35,7 +35,7 @@ const App = () => {
         ...cartItems.slice(cartIndex + 1)
       ]);
     }
-    console.table(cartItems);
+    console.log(JSON.stringify(cartItems));
     //console.log('onCurrencyChange', e.target.value);
   };
 
@@ -70,6 +70,23 @@ const App = () => {
     // console.table(cartItems);
   };
 
+  const calculate = () => {
+    const params = {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'post',
+      body: JSON.stringify(cartItems)
+    };
+    fetch(`http://localhost:5002/api/cart`, params)
+      .then(res => res.json())
+      .then(data => console.table(data))
+      .catch(error => {
+        console.log(error);
+        return error;
+      });
+  };
+
   return (
     <div>
       <h1>Shopping cart currency calculator </h1>
@@ -79,7 +96,7 @@ const App = () => {
         onCurrencyChange={onCurrencyChange}
       />
       <Cart cartItems={cartItems} onCurrencyChange={onCurrencyChange} />
-      <button>Calculate !</button>
+      <button onClick={calculate}>Calculate !</button>
     </div>
   );
 };
