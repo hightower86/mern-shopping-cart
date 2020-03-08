@@ -32,21 +32,49 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 //     res.status(500).json({ message: 'Something goes wrong' });
 //   }
 // });
+const getTotalInRubles = (valutes, cart) => {
+  const total = cart.reduce((rubSum, cartItem) => {
+    const currency = cartItem.currency;
+    if (currency === 'rub') {
+      rubSum += cartItem.price;
+    } else {
+      const rate = valutes[cartItem.currency.toUpperCase()].Value;
+      const rubPrice = cartItem.price * rate;
+      rubSum += rubPrice;
+    }
+    return rubSum;
+  }, 0);
+  return total;
+};
+
+const getConvertedTotal = (totalInRubles, valutes) => {
+  const convertedTotal = ['RUB', 'USD', 'EUR'].reduce((result, currency) => {
+    console.log(currency);
+    if (currency === 'RUB') {
+      result[currency] = Math.floor(totalInRubles * 100) / 100; //Math.round(totalInRubles, -1);
+      console.log(result);
+    } else {
+      result[currency] =
+        Math.floor((totalInRubles / valutes[currency].Value) * 100) / 100;
+
+      console.log(result);
+    }
+    return result;
+  }, {});
+  return convertedTotal;
+};
+
 const getCurrencyRates = async cart => {
   try {
     let response = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
     const json = await response.json();
     const valutes = json.Valute;
 
-    rates = cart.reduce((result, cartItem) => {
-      const currency = cartItem.currency;
-      const rate =
-        currency !== 'rub' ? valutes[cartItem.currency.toUpperCase()].Value : 1;
-      result.push(rate);
-      return result;
-    }, []);
+    totalInRubles = getTotalInRubles(valutes, cart);
 
-    return rates;
+    const convertedTotal = getConvertedTotal(totalInRubles, valutes);
+
+    return convertedTotal;
   } catch (e) {
     console.error(e);
   }
