@@ -3,6 +3,7 @@ const config = require('config');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const fetch = require('node-fetch');
 
 const db = [
   { id: 1, name: 'Table', price: 850 },
@@ -15,6 +16,7 @@ const db = [
 const app = express();
 
 app.use(cors());
+app.use(express.json({ extended: false }));
 
 // create application/json parser
 const jsonParser = bodyParser.json();
@@ -30,13 +32,47 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 //     res.status(500).json({ message: 'Something goes wrong' });
 //   }
 // });
-app.get('/api/cart', (req, res) => {
+const getCurrencyRates = async cart => {
   try {
-    res.json(req.query);
-    console.log('api/cart', req.query);
+    let response = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
+    const json = await response.json();
+    const valutes = json.Valute;
+
+    rates = cart.reduce((result, cartItem) => {
+      const currency = cartItem.currency;
+      const rate =
+        currency !== 'rub' ? valutes[cartItem.currency.toUpperCase()].Value : 1;
+      result.push(rate);
+      return result;
+    }, []);
+
+    return rates;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+// async function getUserAsync(name) {
+//   try{
+//     let response = await fetch(`https://api.github.com/users/${name}`);
+//     return await response.json();
+//   }catch(err){
+//     console.error(err);
+//     // Handle errors here
+//   }
+// }
+
+app.post('/api/cart', async (req, res) => {
+  //console.log(req.body);
+  try {
+    //res.json(req.body);
+    const cartItems = req.body;
+    //console.log(cartItems);
+    const currencyRates = await getCurrencyRates(cartItems);
+    //console.log(currencyRates);
+    res.json(currencyRates);
   } catch (e) {
     res.status(500).json({ message: 'Something goes wrong' });
-    //console.log('error');
   }
 });
 
