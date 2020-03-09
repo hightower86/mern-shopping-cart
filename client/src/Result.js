@@ -7,7 +7,13 @@ const Result = ({ calculate, details }) => {
       <h2>Result</h2>
       <div className='result'>
         <button onClick={calculate}>Calculate !</button>
-        <div className='details'>{details}</div>
+        <div className='details'>
+          {Object.keys(details).map(key => (
+            <div key={key}>
+              {key}: {details[key]}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
