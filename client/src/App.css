@@ -5,3 +5,10 @@
 h1 {
   text-align: center;
 }
+
+.cart-result {
+  margin-top: 10px;
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+}

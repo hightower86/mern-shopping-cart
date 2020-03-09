@@ -1,29 +1,17 @@
-.result {
+.cart {
   min-height: 100px;
   width: 400px;
   background-color: rgb(210, 210, 244);
   margin-top: 10px;
   padding: 10px 0;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
-label {
+/* label {
   margin-right: 5px;
   text-transform: uppercase;
-}
-button {
-  padding: 5px 20px;
-  font-size: 20px;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-button:hover {
-  background-color: #999;
-  color: azure;
-}
-button:focus {
-  outline: none;
-}
+} */
 
 table {
   width: 95%;
@@ -35,6 +23,4 @@ tr {
   border: 1px solid rgb(143, 142, 142);
   border-top: none;
   padding: 5px 15px;
-}
-td {
 }

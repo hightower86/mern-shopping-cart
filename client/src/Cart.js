@@ -4,9 +4,9 @@ import './Cart.css';
 
 const Cart = ({ cartItems, onCurrencyChange }) => {
   return (
-    <div>
+    <div className='cart-wrapper'>
       <h2>Cart</h2>
-      <div className='result'>
+      <div className='cart'>
         <table>
           <thead>
             <tr>

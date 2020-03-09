@@ -19,19 +19,11 @@ app.use(cors());
 app.use(express.json({ extended: false }));
 
 // create application/json parser
-const jsonParser = bodyParser.json();
+//const jsonParser = bodyParser.json();
 
 // create application/x-www-form-urlencoded parser
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
-//app.use('/api/cart', require('./routes/cart.routes'));
+//const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-// app.post('/api/cart', jsonParser, (req, res) => {
-//   try {
-//     res.send(req.body);
-//   } catch (e) {
-//     res.status(500).json({ message: 'Something goes wrong' });
-//   }
-// });
 const getTotalInRubles = (valutes, cart) => {
   const total = cart.reduce((rubSum, cartItem) => {
     const currency = cartItem.currency;
@@ -49,14 +41,11 @@ const getTotalInRubles = (valutes, cart) => {
 
 const getConvertedTotal = (totalInRubles, valutes) => {
   const convertedTotal = ['RUB', 'USD', 'EUR'].reduce((result, currency) => {
-    console.log(currency);
     if (currency === 'RUB') {
       result[currency] = Math.floor(totalInRubles * 100) / 100; //Math.round(totalInRubles, -1);
-      console.log(result);
     } else {
       result[currency] =
         Math.floor((totalInRubles / valutes[currency].Value) * 100) / 100;
-
       console.log(result);
     }
     return result;
@@ -80,24 +69,10 @@ const getCurrencyRates = async cart => {
   }
 };
 
-// async function getUserAsync(name) {
-//   try{
-//     let response = await fetch(`https://api.github.com/users/${name}`);
-//     return await response.json();
-//   }catch(err){
-//     console.error(err);
-//     // Handle errors here
-//   }
-// }
-
 app.post('/api/cart', async (req, res) => {
-  //console.log(req.body);
   try {
-    //res.json(req.body);
     const cartItems = req.body;
-    //console.log(cartItems);
     const currencyRates = await getCurrencyRates(cartItems);
-    //console.log(currencyRates);
     res.json(currencyRates);
   } catch (e) {
     res.status(500).json({ message: 'Something goes wrong' });
@@ -116,11 +91,6 @@ const PORT = config.get('port') || 5001;
 
 async function start() {
   try {
-    // await mongoose.connect(config.get('mongoUri'), {
-    //   useNewUrlParser: true,
-    //   useUnifiedTopology: true,
-    //   useCreateIndex: true
-    // });
     app.listen(PORT, () => console.log(`App is running on port ${PORT}`));
   } catch (e) {
     console.log('Server Error', e.message);
