@@ -7,6 +7,7 @@ import './App.css';
 const App = () => {
   const [goods, setGoods] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [result, setResult] = useState('');
 
   useEffect(() => {
     const getDb = async () => {
@@ -71,7 +72,7 @@ const App = () => {
     };
     fetch(`http://localhost:5002/api/cart`, params)
       .then(res => res.json())
-      .then(data => console.table(data))
+      .then(data => setResult(JSON.stringify(data)))
       .catch(error => {
         console.log(error);
         return error;
@@ -88,7 +89,7 @@ const App = () => {
       />
       <div className='cart-result'>
         <Cart cartItems={cartItems} onCurrencyChange={onCurrencyChange} />
-        <Result calculate={calculate} />
+        <Result calculate={calculate} details={result} />
       </div>
     </div>
   );
