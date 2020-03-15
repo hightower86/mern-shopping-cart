@@ -34,7 +34,6 @@ const App = () => {
         ...cartItems.slice(cartIndex + 1)
       ]);
     }
-    console.log(JSON.stringify(cartItems));
   };
 
   const addToCartHandle = e => {

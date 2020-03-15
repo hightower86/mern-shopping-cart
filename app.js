@@ -18,12 +18,6 @@ const app = express();
 app.use(cors());
 app.use(express.json({ extended: false }));
 
-// create application/json parser
-//const jsonParser = bodyParser.json();
-
-// create application/x-www-form-urlencoded parser
-//const urlencodedParser = bodyParser.urlencoded({ extended: false });
-
 const getTotalInRubles = (valutes, cart) => {
   const total = cart.reduce((rubSum, cartItem) => {
     const currency = cartItem.currency;
@@ -46,7 +40,7 @@ const getConvertedTotal = (totalInRubles, valutes) => {
     } else {
       result[currency] =
         Math.floor((totalInRubles / valutes[currency].Value) * 100) / 100;
-      console.log(result);
+      //console.log(result);
     }
     return result;
   }, {});

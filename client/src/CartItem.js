@@ -4,7 +4,6 @@ import './CartItem.css';
 
 const CartItem = ({ item, onCurrencyChange }) => {
   const { id, name, quantity, price } = item;
-  console.log(item);
   return (
     <tr className='t-row'>
       <td className='td-id'>{id}</td>
